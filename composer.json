@@ -1,0 +1,19 @@
+{
+    "name": "jthomason/php-ranges",
+    "description": "Range classes for PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "James Thomason, Jr",
+            "email": "james@jamesthomasonjr.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "Ranges\\": "lib/"
+        }
+    }
+}
