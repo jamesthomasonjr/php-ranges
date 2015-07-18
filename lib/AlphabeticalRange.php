@@ -2,7 +2,7 @@
 
 namespace Ranges;
 
-use Traits\ValidatedSettings;
+use Ranges\Traits\ValidatedSettings;
 
 /**
  * An immutable representation of an alphabetical range.
@@ -12,11 +12,6 @@ use Traits\ValidatedSettings;
  */
 class AlphabeticalRange
 {
-    /**
-     * Trait which adds a settings property and validation + default capabilities
-     */
-    use ValidatedSettings;
-
     /**
      * The beginning of the range.
      *
@@ -44,8 +39,6 @@ class AlphabeticalRange
      */
     public function __construct($start, $end, $settings = [])
     {
-        $this->setSettings($settings);
-
         /**
          * ASCII Codes are easier to work with and using ord() automagically
          * grabs just the first provided character from a string.
@@ -58,7 +51,7 @@ class AlphabeticalRange
 
         if ($startASCIICode <= $endASCIICode) {
             $this->setStart($start);
-            $this->seEnd($end);
+            $this->setEnd($end);
         } else {
             $this->setStart($end);
             $this->setEnd($start);

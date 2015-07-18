@@ -2,7 +2,7 @@
 
 namespace Ranges;
 
-use Traits\ValidatedSettings;
+use Ranges\Traits\ValidatedSettings;
 
 /**
  * An immutable representation of a numerical range.
@@ -34,20 +34,30 @@ class NumericalRange
     /**
      * The accepted settings values.
      *
-     * @var array[]
+     * @return array[]
      */
-    protected static $possible = [
-        "type" => ["int", "float", "numeric"],
-    ];
+    protected static function getPossibleSettings()
+    {
+        static $possible = [
+            "type" => ["int", "float", "numeric"],
+        ];
+
+        return $possible;
+    }
 
     /**
      * The default settings values.
      *
-     * @var string[]
+     * @return string[]
      */
-    protected static $default = [
-        "type" => "numeric",
-    ];
+    protected static function getDefaultSettings()
+    {
+        static $default = [
+            "type" => "numeric",
+        ];
+
+        return $default;
+    }
 
     /**
      * Creates a NumericalRange object.
@@ -66,7 +76,7 @@ class NumericalRange
 
         if ($start <= $end) {
             $this->setStart($start);
-            $this->seEnd($end);
+            $this->setEnd($end);
         } else {
             $this->setStart($end);
             $this->setEnd($start);

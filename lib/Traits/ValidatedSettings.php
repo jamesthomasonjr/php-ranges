@@ -5,8 +5,8 @@ namespace Ranges\Traits;
 trait ValidatedSettings
 {
     protected $settings;
-    protected static $possible = [];
-    protected static $default = [];
+    protected abstract static function getPossibleSettings();
+    protected abstract static function getDefaultSettings();
 
     protected function setSettings(array $settings)
     {
@@ -21,10 +21,10 @@ trait ValidatedSettings
     protected function validateSettings(array $settings)
     {
         // Define possible setting values.
-        $possible = static::$possible;
+        $possible = static::getPossibleSettings();
 
         // Define default setting values.
-        $default = static::$default;
+        $default = static::getDefaultSettings();
 
         // Trim provided settings to only valid setting keys.
         $matched = array_intersect_key($settings, $possible);
@@ -32,8 +32,7 @@ trait ValidatedSettings
         // Trim resulting settings to only valid setting values.
         $valid = array_filter(
             $matched,
-            [$this, 'settingsValueIsValid'],
-            ARRAY_FILTER_USE_BOTH
+            [$this, 'settingsValueIsValid']
         );
 
         // Use default settings for any settings that were either not provided or invalid.
@@ -45,7 +44,7 @@ trait ValidatedSettings
     protected function settingsValueIsValid($key, $value)
     {
         // Get the valid values for the given settings key
-        $validValues = static::$possible[$key];
+        $validValues = static::getPossibleSettings()[$key];
 
         // Check if the provided settings value is valid
         return in_array($value, $validValues);

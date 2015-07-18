@@ -14,11 +14,6 @@ use \DateTime;
 class DateTimeRange
 {
     /**
-     * Trait which adds a settings property and validation + default capabilities
-     */
-    use ValidatedSettings;
-
-    /**
      * The beginning of the range.
      *
      * @var DateTime
@@ -45,11 +40,9 @@ class DateTimeRange
      */
     public function __construct(DateTime $start, DateTime $end, $settings = [])
     {
-        $this->setSettings($settings);
-
         if ($start <= $end) {
             $this->setStart($start);
-            $this->seEnd($end);
+            $this->setEnd($end);
         } else {
             $this->setStart($end);
             $this->setEnd($start);
